@@ -9,3 +9,7 @@ This sample demonstrates techniques to use for such conversion when the sending 
 - `ClassMapper` id mapping configuration with a legacy POJO listener.
 
 It is a Spring Boot application and can be run with normal boot run methods, e.g.: `mvn spring-boot:run`
+
+curl -G "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=foo" --data-urlencode "message=HelloWorld"
+
+RabbitMQ console at http://localhost:15672 with username `guest` and password `guest`

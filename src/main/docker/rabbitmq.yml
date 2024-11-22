@@ -1,0 +1,11 @@
+services:
+  rabbitmq:
+    container_name: rabbit
+    image: rabbitmq:4.0.3
+    ports:
+      # AMQP protocol port
+      - '5672:5672'
+      # HTTP management UI
+      - '15672:15672'
+    volumes:
+      - ./rabbit/enabled_plugins:/etc/rabbitmq/enabled_plugins
