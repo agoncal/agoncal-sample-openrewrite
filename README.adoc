@@ -4,9 +4,15 @@ Spring AMQP applications communicating over AMQP using JSON add type information
 
 This sample demonstrates techniques to use for such conversion when the sending application is not a Spring app or if you wish to convert to a different type when receiving messages.
 
+Start RabbitMQ : `docker compose -f src/main/docker/rabbitmq.yml up`
+
 It is a Spring Boot application and can be run with normal boot run methods, e.g.: `mvn spring-boot:run`
 
+Send messages to both queues:
+
+```
 curl -G "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=foo" --data-urlencode "message=HelloWorld Foo"
 curl -G "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=bar" --data-urlencode "message=HelloWorld Bar"
+```
 
 RabbitMQ console at http://localhost:15672 with username `guest` and password `guest`
