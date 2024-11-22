@@ -73,7 +73,6 @@ public class Consumer {
         public String toString() {
             return getClass().getSimpleName() + " [bar=" + this.bar + "]";
         }
-
     }
 }
 
