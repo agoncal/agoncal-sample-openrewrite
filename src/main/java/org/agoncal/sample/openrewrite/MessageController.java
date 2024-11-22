@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MessageController {
 
     @Autowired
-    private DefaultProducer producer;
+    private Producer producer;
 
     @GetMapping("/sendMessages")
     public ResponseEntity<String> sendMessages(@RequestParam String queue, @RequestParam String message) {
@@ -20,6 +20,6 @@ public class MessageController {
         } else {
             return ResponseEntity.badRequest().body("Invalid queue name");
         }
-        return ResponseEntity.ok("Message sent to " + queue + " queue");
+        return ResponseEntity.ok("Message '" + message + "' sent to '" + queue + "' queue");
     }
 }
