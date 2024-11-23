@@ -1,6 +1,5 @@
 package org.agoncal.sample.openrewrite.rabbitmq;
 
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.SpringApplication;
@@ -18,18 +17,8 @@ public class ApplicationRabbitMQ {
     }
 
     @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+    public RabbitTemplate messagingTemplate(ConnectionFactory connectionFactory) {
         return new RabbitTemplate(connectionFactory);
-    }
-
-    @Bean
-    public Queue foo() {
-        return new Queue(FOO_QUEUE);
-    }
-
-    @Bean
-    public Queue bar() {
-        return new Queue(BAR_QUEUE);
     }
 }
 	
