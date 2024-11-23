@@ -6,6 +6,7 @@
 	<groupId>org.agoncal.sample.openrewrite</groupId>
 	<artifactId>rabbitmq</artifactId>
 	<version>1.0.0</version>
+	<name>OpenRewrite :: RabbitMQ</name>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

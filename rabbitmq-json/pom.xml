@@ -6,6 +6,7 @@
 	<groupId>org.agoncal.sample.openrewrite</groupId>
 	<artifactId>rabbitmq-json</artifactId>
 	<version>1.0.0</version>
+	<name>OpenRewrite :: RabbitMQ JSON</name>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

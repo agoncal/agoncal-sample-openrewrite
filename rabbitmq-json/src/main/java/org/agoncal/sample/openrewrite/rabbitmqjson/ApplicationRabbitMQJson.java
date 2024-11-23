@@ -1,4 +1,4 @@
-package org.agoncal.sample.openrewrite;
+package org.agoncal.sample.openrewrite.rabbitmqjson;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -10,13 +10,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class Application {
+public class ApplicationRabbitMQJson {
 
     public static final String FOO_QUEUE = "foo";
     public static final String BAR_QUEUE = "bar";
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(ApplicationRabbitMQJson.class, args);
     }
 
     @Bean

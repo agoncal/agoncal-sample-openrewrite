@@ -1,4 +1,4 @@
-package org.agoncal.sample.openrewrite;
+package org.agoncal.sample.openrewrite.rabbitmq;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

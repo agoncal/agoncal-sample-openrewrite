@@ -1,4 +1,4 @@
-package org.agoncal.sample.openrewrite;
+package org.agoncal.sample.openrewrite.rabbitmq;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +14,9 @@ public class MessageController {
     @GetMapping("/sendMessages")
     public ResponseEntity<String> sendMessages(@RequestParam String queue, @RequestParam String message) {
         if (queue.equalsIgnoreCase("foo")) {
-            producer.sendMessage(Application.FOO_QUEUE, message);
+            producer.sendMessage(ApplicationRabbitMQ.FOO_QUEUE, message);
         } else if (queue.equalsIgnoreCase("bar")) {
-            producer.sendMessage(Application.BAR_QUEUE, message);
+            producer.sendMessage(ApplicationRabbitMQ.BAR_QUEUE, message);
         } else {
             return ResponseEntity.badRequest().body("Invalid queue name");
         }

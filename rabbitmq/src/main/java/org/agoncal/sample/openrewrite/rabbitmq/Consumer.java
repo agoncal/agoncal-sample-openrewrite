@@ -1,4 +1,4 @@
-package org.agoncal.sample.openrewrite;
+package org.agoncal.sample.openrewrite.rabbitmq;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -10,13 +10,13 @@ public class Consumer {
 
     private volatile CountDownLatch latch = new CountDownLatch(2);
 
-    @RabbitListener(queues = Application.FOO_QUEUE)
+    @RabbitListener(queues = ApplicationRabbitMQ.FOO_QUEUE)
     public void listenForAFoo(Foo foo) {
         System.out.println("Expected a Foo, got a " + foo);
         this.latch.countDown();
     }
 
-    @RabbitListener(queues = Application.BAR_QUEUE)
+    @RabbitListener(queues = ApplicationRabbitMQ.BAR_QUEUE)
     public void listenForABar(Bar bar) {
         System.out.println("Expected a Bar, got a " + bar);
         this.latch.countDown();

@@ -1,4 +1,4 @@
-package org.agoncal.sample.openrewrite;
+package org.agoncal.sample.openrewrite.rabbitmqjson;
 
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageBuilder;
