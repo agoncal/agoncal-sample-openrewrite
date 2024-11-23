@@ -11,68 +11,15 @@ public class Consumer {
     private volatile CountDownLatch latch = new CountDownLatch(2);
 
     @RabbitListener(queues = ApplicationRabbitMQ.FOO_QUEUE)
-    public void listenForAFoo(Foo foo) {
-        System.out.println("Expected a Foo, got a " + foo);
+    public void listenForAFoo(String msg) {
+        System.out.println("Message received on queue " + ApplicationRabbitMQ.FOO_QUEUE + " " + msg);
         this.latch.countDown();
     }
 
     @RabbitListener(queues = ApplicationRabbitMQ.BAR_QUEUE)
-    public void listenForABar(Bar bar) {
-        System.out.println("Expected a Bar, got a " + bar);
+    public void listenForABar(String msg) {
+        System.out.println("Message received on queue " + ApplicationRabbitMQ.BAR_QUEUE + " " + msg);
         this.latch.countDown();
-    }
-
-    public static class Foo {
-
-        private String foo;
-
-        public Foo() {
-            super();
-        }
-
-        public Foo(String foo) {
-            this.foo = foo;
-        }
-
-        public String getFoo() {
-            return this.foo;
-        }
-
-        public void setFoo(String foo) {
-            this.foo = foo;
-        }
-
-        @Override
-        public String toString() {
-            return getClass().getSimpleName() + " [foo=" + this.foo + "]";
-        }
-
-    }
-
-    public static class Bar {
-
-        private String bar;
-
-        public Bar() {
-            super();
-        }
-
-        public Bar(String bar) {
-            this.bar = bar;
-        }
-
-        public String getBar() {
-            return this.bar;
-        }
-
-        public void setBar(String bar) {
-            this.bar = bar;
-        }
-
-        @Override
-        public String toString() {
-            return getClass().getSimpleName() + " [bar=" + this.bar + "]";
-        }
     }
 }
 
