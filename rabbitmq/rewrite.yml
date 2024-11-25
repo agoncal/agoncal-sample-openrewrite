@@ -56,6 +56,6 @@ recipeList:
   - org.openrewrite.properties.ChangePropertyKey:
       oldPropertyKey: spring.rabbitmq.username
       newPropertyKey: spring.cloud.azure.servicebus.credential.username
-  - org.openrewrite.properties.DeleteProperty:
-      propertyKey: spring.rabbitmq.password
+  - org.openrewrite.properties.ChangePropertyKey:
+      oldPropertyKey: spring.rabbitmq.password
       newPropertyKey: spring.cloud.azure.servicebus.credential.password
