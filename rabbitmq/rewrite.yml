@@ -33,7 +33,7 @@ recipeList:
       newMethodName: send
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: org.springframework.amqp.core.Message
-      newFullyQualifiedTypeName: org.springframework.messaging.Message
+      newFullyQualifiedTypeName: org.springframework.messaging.support.GenericMessage
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: org.springframework.amqp.rabbit.connection.ConnectionFactory
       newFullyQualifiedTypeName: com.azure.spring.messaging.servicebus.core.ServiceBusProducerFactory
