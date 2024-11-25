@@ -1,6 +1,5 @@
 package org.agoncal.sample.openrewrite.rabbitmqjson;
 
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
@@ -29,16 +28,6 @@ public class ApplicationRabbitMQJson {
     @Bean
     public MessageConverter jsonConverter() {
         return new Jackson2JsonMessageConverter();
-    }
-
-    @Bean
-    public Queue foo() {
-        return new Queue(FOO_QUEUE);
-    }
-
-    @Bean
-    public Queue bar() {
-        return new Queue(BAR_QUEUE);
     }
 }
 	
