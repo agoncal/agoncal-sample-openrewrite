@@ -51,11 +51,11 @@ recipeList:
   - org.openrewrite.properties.ChangePropertyKey:
       oldPropertyKey: spring.rabbitmq.host
       newPropertyKey: spring.cloud.azure.servicebus.connection-string
-  - org.openrewrite.properties.ChangePropertyKey:
-      oldPropertyKey: spring.rabbitmq.port
-      newPropertyKey: spring.cloud.azure.servicebus.entity-name
+  - org.openrewrite.properties.DeleteProperty:
+      propertyKey: spring.rabbitmq.port
   - org.openrewrite.properties.ChangePropertyKey:
       oldPropertyKey: spring.rabbitmq.username
-      newPropertyKey: spring.cloud.azure.servicebus.entity-type
+      newPropertyKey: spring.cloud.azure.servicebus.credential.username
   - org.openrewrite.properties.DeleteProperty:
       propertyKey: spring.rabbitmq.password
+      newPropertyKey: spring.cloud.azure.servicebus.credential.password
