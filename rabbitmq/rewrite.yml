@@ -15,6 +15,9 @@ recipeList:
       groupId: com.azure.spring
       artifactId: spring-messaging-azure-servicebus
       version: latest.release
+  - org.openrewrite.xml.AddCommentToXmlTag:
+      xPath: /project/dependencies/dependency[artifactId='spring-messaging-azure-servicebus']
+      commentText: Use Azure Service Bus in Spring applications https://learn.microsoft.com/azure/developer/java/spring-framework/using-service-bus-in-spring-applications
   
   # Add Azure dependency management
   - org.openrewrite.maven.AddManagedDependency:
