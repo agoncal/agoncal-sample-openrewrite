@@ -1,5 +1,7 @@
 package org.agoncal.sample.openrewrite.rabbitmqjson;
 
+import static org.agoncal.sample.openrewrite.rabbitmqjson.ApplicationRabbitMQJson.BAR_QUEUE;
+import static org.agoncal.sample.openrewrite.rabbitmqjson.ApplicationRabbitMQJson.FOO_QUEUE;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -10,15 +12,15 @@ public class Consumer {
 
     private volatile CountDownLatch latch = new CountDownLatch(2);
 
-    @RabbitListener(queues = ApplicationRabbitMQJson.FOO_QUEUE)
-    public void listenForAFoo(Foo foo) {
-        System.out.println("Expected a Foo, got a " + foo);
+    @RabbitListener(queues = FOO_QUEUE)
+    public void listenToFoo(Foo foo) {
+        System.out.println("Foo received on queue " + FOO_QUEUE + " " + foo);
         this.latch.countDown();
     }
 
-    @RabbitListener(queues = ApplicationRabbitMQJson.BAR_QUEUE)
-    public void listenForABar(Bar bar) {
-        System.out.println("Expected a Bar, got a " + bar);
+    @RabbitListener(queues = BAR_QUEUE)
+    public void listenToBar(Bar bar) {
+        System.out.println("Bar received on queue " + BAR_QUEUE + " " + bar);
         this.latch.countDown();
     }
 

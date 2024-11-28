@@ -15,6 +15,9 @@ recipeList:
       groupId: com.azure.spring
       artifactId: spring-messaging-azure-servicebus
       version: latest.release
+  - org.openrewrite.xml.AddCommentToXmlTag:
+      xPath: /project/dependencies/dependency[artifactId='spring-messaging-azure-servicebus']
+      commentText: Use Azure Service Bus in Spring applications https://learn.microsoft.com/azure/developer/java/spring-framework/using-service-bus-in-spring-applications
   
   # Add Azure dependency management
   - org.openrewrite.maven.AddManagedDependency:
@@ -33,7 +36,7 @@ recipeList:
       newMethodName: send
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: org.springframework.amqp.core.Message
-      newFullyQualifiedTypeName: org.springframework.messaging.Message
+      newFullyQualifiedTypeName: org.springframework.messaging.support.GenericMessage
   - org.openrewrite.java.ChangeType:
       oldFullyQualifiedTypeName: org.springframework.amqp.rabbit.connection.ConnectionFactory
       newFullyQualifiedTypeName: com.azure.spring.messaging.servicebus.core.ServiceBusProducerFactory
@@ -51,11 +54,14 @@ recipeList:
   - org.openrewrite.properties.ChangePropertyKey:
       oldPropertyKey: spring.rabbitmq.host
       newPropertyKey: spring.cloud.azure.servicebus.connection-string
-  - org.openrewrite.properties.ChangePropertyKey:
-      oldPropertyKey: spring.rabbitmq.port
-      newPropertyKey: spring.cloud.azure.servicebus.entity-name
+  - org.openrewrite.properties.ChangePropertyValue:
+      propertyKey: spring.cloud.azure.servicebus.connection-string
+      newValue: Endpoint=sb://localhost;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true;
+  - org.openrewrite.properties.DeleteProperty:
+      propertyKey: spring.rabbitmq.port
   - org.openrewrite.properties.ChangePropertyKey:
       oldPropertyKey: spring.rabbitmq.username
-      newPropertyKey: spring.cloud.azure.servicebus.entity-type
-  - org.openrewrite.properties.DeleteProperty:
-      propertyKey: spring.rabbitmq.password
+      newPropertyKey: spring.cloud.azure.servicebus.credential.username
+  - org.openrewrite.properties.ChangePropertyKey:
+      oldPropertyKey: spring.rabbitmq.password
+      newPropertyKey: spring.cloud.azure.servicebus.credential.password
