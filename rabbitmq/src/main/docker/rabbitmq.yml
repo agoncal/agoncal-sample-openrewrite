@@ -1,3 +1,4 @@
+name: rabbitmq
 services:
   rabbitmq:
     container_name: rabbit

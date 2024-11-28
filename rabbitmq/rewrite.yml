@@ -54,6 +54,9 @@ recipeList:
   - org.openrewrite.properties.ChangePropertyKey:
       oldPropertyKey: spring.rabbitmq.host
       newPropertyKey: spring.cloud.azure.servicebus.connection-string
+  - org.openrewrite.properties.ChangePropertyValue:
+      propertyKey: spring.cloud.azure.servicebus.connection-string
+      newValue: Endpoint=sb://localhost;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true;
   - org.openrewrite.properties.DeleteProperty:
       propertyKey: spring.rabbitmq.port
   - org.openrewrite.properties.ChangePropertyKey:
