@@ -9,7 +9,7 @@ services:
       - ./servicebus/config.json:/ServiceBus_Emulator/ConfigFiles/Config.json
     environment:
       SQL_SERVER: sqledge
-      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+      MSSQL_SA_PASSWORD: 123sqledgepwd$123
       ACCEPT_EULA: Y
     depends_on:
       - sqledge
@@ -26,6 +26,6 @@ services:
           - "sqledge"
     environment:
       ACCEPT_EULA: Y
-      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+      MSSQL_SA_PASSWORD: 123sqledgepwd$123
 networks:
   sb-emulator:
