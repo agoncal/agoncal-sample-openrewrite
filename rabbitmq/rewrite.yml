@@ -65,3 +65,13 @@ recipeList:
   - org.openrewrite.properties.ChangePropertyKey:
       oldPropertyKey: spring.rabbitmq.password
       newPropertyKey: spring.cloud.azure.servicebus.credential.password
+  - org.openrewrite.properties.AddProperty:
+      property: spring.cloud.azure.servicebus.namespace
+      value: sbemulatorns
+  - org.openrewrite.properties.AddProperty:
+      property: spring.cloud.azure.servicebus.entity
+      value: queue
+      comment: Azure Service Bus entity type. Could be `queue` or `topic`
+
+# Add @EnableAzureMessaging to ApplicationRabbitMQ
+# On the producer rabbitTemplate.send(queueName, MessageBuilder.withPayload(msg).build());
