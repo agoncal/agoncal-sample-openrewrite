@@ -5,7 +5,7 @@ export RNDM=$RANDOM
 
 # Set the environment variables
 export RESOURCE_GROUP=rg-antoniomanug-$RNDM
-# Pick your closest region
+# Pick your closest region az account list-locations --output table
 export REGION=eastus2
 export SERVICE_BUS_NAMESPACE=sb-antoniomanug-$RNDM
 
