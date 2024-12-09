@@ -59,12 +59,10 @@ recipeList:
       newValue: Endpoint=sb://localhost;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true;
   - org.openrewrite.properties.DeleteProperty:
       propertyKey: spring.rabbitmq.port
-  - org.openrewrite.properties.ChangePropertyKey:
-      oldPropertyKey: spring.rabbitmq.username
-      newPropertyKey: spring.cloud.azure.servicebus.credential.username
-  - org.openrewrite.properties.ChangePropertyKey:
-      oldPropertyKey: spring.rabbitmq.password
-      newPropertyKey: spring.cloud.azure.servicebus.credential.password
+  - org.openrewrite.properties.DeleteProperty:
+      propertyKey: spring.rabbitmq.username
+  - org.openrewrite.properties.DeleteProperty:
+      propertyKey: spring.rabbitmq.password
   - org.openrewrite.properties.AddProperty:
       property: spring.cloud.azure.servicebus.namespace
       value: sbemulatorns
