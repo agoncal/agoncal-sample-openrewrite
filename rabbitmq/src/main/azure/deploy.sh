@@ -1,39 +1,52 @@
 #!/bin/bash
 
-# Generate a random number for unique resource naming
-export RNDM=$RANDOM
+# Login if not already
+# az login
+# az account show
 
-# Set the environment variables
-export RESOURCE_GROUP=rg-antoniomanug-$RNDM
-# Pick your closest region az account list-locations --output table
-export REGION=eastus2
-export SERVICE_BUS_NAMESPACE=sb-antoniomanug-$RNDM
+echo "Setting up environment variables..."
+echo "----------------------------------"
+PROJECT="openrewrite"
+UNIQ_KEY="$PROJECT-$RANDOM"
+RESOURCE_GROUP="rg-$PROJECT"
+# Pick your closest region az account list-locations --output table --query "sort_by([].{Name: name, DisplayName: displayName}, &Name)"
+LOCATION="swedencentral"
+TAG="$PROJECT"
+SERVICE_BUS_NAMESPACE="sb-$UNIQ_KEY"
 
-# Create the resource group  
-az group create --name $RESOURCE_GROUP --location $REGION
+echo "Creating the resource group..."
+echo "------------------------------"
+az group create \
+  --name "$RESOURCE_GROUP" \
+  --location "$LOCATION" \
+  --tags system="$TAG"
 
-# Create the Service Bus namespace
+echo "Creating the Service Bus namespace..."
+echo "------------------------------"
 az servicebus namespace create \
-  --resource-group $RESOURCE_GROUP \
-  --name $SERVICE_BUS_NAMESPACE \
+  --resource-group "$RESOURCE_GROUP" \
+  --name "$SERVICE_BUS_NAMESPACE" \
   --sku Premium \
-  --location $REGION    
+  --location "$LOCATION"  
 
-# Create the Service Bus queues  
+echo "Creating the Service Bus queues..."
+echo "------------------------------"
 az servicebus queue create \
-  --resource-group $RESOURCE_GROUP \
-  --namespace-name $SERVICE_BUS_NAMESPACE \
+  --resource-group "$RESOURCE_GROUP" \
+  --namespace-name "$SERVICE_BUS_NAMESPACE" \
   --name foo
 az servicebus queue create \
-  --resource-group $RESOURCE_GROUP \
-  --namespace-name $SERVICE_BUS_NAMESPACE \
+  --resource-group "$RESOURCE_GROUP" \
+  --namespace-name "$SERVICE_BUS_NAMESPACE" \
   --name bar
 
-# Retrieve the connection string for the Service Bus namespace
-export SERVICE_BUS_QUEUE_CONNECTION_STRING=$(
+# 
+echo "Retrieving the connection string for the Service Bus namespace..."
+echo "------------------------------"
+SERVICE_BUS_QUEUE_CONNECTION_STRING=$(
   az servicebus namespace authorization-rule keys list \
-    --resource-group $RESOURCE_GROUP --namespace-name $SERVICE_BUS_NAMESPACE --name RootManageSharedAccessKey \
+    --resource-group "$RESOURCE_GROUP" --namespace-name "$SERVICE_BUS_NAMESPACE" --name RootManageSharedAccessKey \
     --query primaryConnectionString --output tsv
   )
 
-echo SERVICE_BUS_QUEUE_CONNECTION_STRING=$SERVICE_BUS_QUEUE_CONNECTION_STRING  
+echo SERVICE_BUS_QUEUE_CONNECTION_STRING="$SERVICE_BUS_QUEUE_CONNECTION_STRING"
