@@ -1,20 +1,3 @@
-# Receiving JSON From a Non-Spring Application
+# OpenRewrite
 
-Spring AMQP applications communicating over AMQP using JSON add type information to message headers to enable the receiving application to convert the JSON to a class instance.
-
-This sample demonstrates techniques to use for such conversion when the sending application is not a Spring app or if you wish to convert to a different type when receiving messages.
-
-Start RabbitMQ : `docker compose -f src/main/docker/rabbitmq.yml up`.
-
-RabbitMQ is listening on port `5677` (check the `application.properties` file).
-
-It is a Spring Boot application and can be run with normal boot run methods, e.g.: `mvn spring-boot:run`
-
-Send messages to both queues:
-
-```
-curl -G "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=foo" --data-urlencode "message=HelloWorld Foo"
-curl -G "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=bar" --data-urlencode "message=HelloWorld Bar"
-```
-
-RabbitMQ console at http://localhost:15672 with username `guest` and password `guest`
+Contains some code samples that run locally and, thanks to OpenRewrite recipes, can then be migrated to Azure.

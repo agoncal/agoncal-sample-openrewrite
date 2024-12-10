@@ -57,6 +57,7 @@ recipeList:
   - org.openrewrite.properties.ChangePropertyValue:
       propertyKey: spring.cloud.azure.servicebus.connection-string
       newValue: Endpoint=sb://localhost;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true;
+      comment: Azure Service Bus connection string. The following value uses the Azure Service Bus Emulator
   - org.openrewrite.properties.DeleteProperty:
       propertyKey: spring.rabbitmq.port
   - org.openrewrite.properties.DeleteProperty:
@@ -64,12 +65,6 @@ recipeList:
   - org.openrewrite.properties.DeleteProperty:
       propertyKey: spring.rabbitmq.password
   - org.openrewrite.properties.AddProperty:
-      property: spring.cloud.azure.servicebus.namespace
-      value: sbemulatorns
-  - org.openrewrite.properties.AddProperty:
-      property: spring.cloud.azure.servicebus.entity
+      property: spring.cloud.azure.servicebus.entity-type
       value: queue
       comment: Azure Service Bus entity type. Could be `queue` or `topic`
-
-# Add @EnableAzureMessaging to ApplicationRabbitMQ
-# On the producer rabbitTemplate.send(queueName, MessageBuilder.withPayload(msg).build());
