@@ -1,0 +1,26 @@
+# Querying local Postgres to Azure Posrgres
+
+This sample fills a Postgres SQL with some data and exposes a REST endpoint to get the content of the database as JSON.
+
+## Running the sample with locoal Postgres
+
+It is a Quarkus application and can be run with : `mvn quarkus:dev`
+
+Get the content of the database:
+
+```
+curl -G "http://127.0.0.1:8080/countries" | jq
+```
+
+## Running the sample with Azure Postgres
+
+Execute the OpenRewrite recipe `rewrite.yml`.
+Deploy the Azure Postgres database with the Azure CLI script `src/main/azure/deploy.sh`.
+
+Execute the application with `mvn quarkus:dev`
+
+Get the content of the database:
+
+```
+curl -G "http://127.0.0.1:8080/countries" | jq
+```

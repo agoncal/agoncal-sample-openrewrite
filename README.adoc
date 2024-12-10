@@ -1,3 +1,8 @@
 # OpenRewrite
 
 Contains some code samples that run locally and, thanks to OpenRewrite recipes, can then be migrated to Azure.
+
+## References
+
+- [OpenRewrite](https://docs.openrewrite.org/)
+- [Migrate Java applications to Azure](https://learn.microsoft.com/azure/developer/java/migration/migration-overview)
