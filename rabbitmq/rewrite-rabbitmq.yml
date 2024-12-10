@@ -3,6 +3,12 @@ type: specs.openrewrite.org/v1beta/recipe
 name: com.azure.migrate.MigrateRabbitMQToAzureServiceBus
 displayName: Migrate RabbitMQ to Azure Service Bus
 description: Replaces RabbitMQ dependencies and APIs with Azure Service Bus dependencies
+tags:
+  - migration
+  - rabbitMQ
+  - messaging
+  - azure
+  - spring
 recipeList:
 
   # Change RabbitMQ dependencies with Azure Service Bus dependencies

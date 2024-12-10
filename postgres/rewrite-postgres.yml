@@ -1,0 +1,39 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.azure.migrate.MigratePostgresToAzurePostgresFlexibleServer
+displayName: Migrate Postgres To Azure Postgres Flexible Server
+description: Replaces a local Postgres database with a remote Azure Postgres Flexible Server database
+tags:
+  - migration
+  - postgres
+  - database
+  - azure
+  - quarkus
+recipeList:
+
+  # Configuration property
+  - org.openrewrite.properties.AddProperty:
+      property: quarkus.datasource.jdbc.url
+      value: jdbc:postgresql://db-openrewrite.postgres.database.azure.com:5432/openrewrite?ssl=true&sslmode=require
+      comment: TODO Make sure you setup the database connection string properly 
+  - org.openrewrite.properties.AddProperty:
+      property: quarkus.datasource.username
+      value: dbopenrewriteadmin
+      comment: TODO Make sure you setup the database username properly 
+  - org.openrewrite.properties.AddProperty:
+      property: quarkus.datasource.password
+      value: db-openrewrite-p#ssw0rd-12046
+      comment: TODO Having clear passwords in the configuration is not recommended. Instead use Azure Key Vault as a secure methods to store and retrieve the password 
+
+  - org.openrewrite.properties.ChangePropertyValue:
+      propertyKey: quarkus.datasource.jdbc.url
+      newValue: jdbc:postgresql://db-openrewrite.postgres.database.azure.com:5432/openrewrite?ssl=true&sslmode=require
+      comment: TODO Make sure you setup the database connection string properly
+  - org.openrewrite.properties.ChangePropertyValue:
+      propertyKey: quarkus.datasource.username
+      newValue: dbopenrewriteadmin
+      comment: TODO Make sure you setup the database username properly
+  - org.openrewrite.properties.ChangePropertyValue:
+      propertyKey: quarkus.datasource.password
+      newValue: db-openrewrite-p#ssw0rd-12046
+      comment: TODO Having clear passwords in the configuration is not recommended. Instead use Azure Key Vault as a secure methods to store and retrieve the password
