@@ -2,13 +2,14 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: com.azure.migrate.MigratePostgresToAzurePostgresFlexibleServer
 displayName: Migrate Postgres To Azure Postgres Flexible Server
-description: Replaces a local Postgres database with a remote Azure Postgres Flexible Server database
+description: Sets the Quarkus Postgres configuration to use Azure Postgres Flexible Server
 tags:
+  - quarkus
   - migration
   - postgres
   - database
   - azure
-  - quarkus
+  - azure postgres flexible server
 recipeList:
 
   # Configuration property
