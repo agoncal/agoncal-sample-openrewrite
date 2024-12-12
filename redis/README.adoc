@@ -1,0 +1,35 @@
+# Add and Retrieving Data from Redis
+
+This sample adds and retrieves data from a Redis instance. 
+
+## Running the sample with a local Redis
+
+Start Redis : `docker compose -f src/main/docker/redis.yml up`.
+Redis is listening on port `6379` (check the `application.properties` file).
+It is a Spring Boot application and can be run with normal boot run methods, e.g.: `mvn spring-boot:run`
+
+Send messages to both queues:
+
+```
+curl -X GET  "http://127.0.0.1:8080/products"
+curl -X POST "http://127.0.0.1:8080/product/add" -H "Content-Type: application/json" -d '{"id":1,"name":"Product One"}'
+curl -X POST "http://127.0.0.1:8080/product/add" -H "Content-Type: application/json" -d '{"id":2,"name":"Product Two"}'
+curl -X POST "http://127.0.0.1:8080/product/add" -H "Content-Type: application/json" -d '{"id":3,"name":"Product Three"}'
+curl -X POST "http://127.0.0.1:8080/product/add" -H "Content-Type: application/json" -d '{"id":4,"name":"Product Four"}'
+curl -X GET  "http://127.0.0.1:8080/product/1"
+curl -X GET  "http://127.0.0.1:8080/products"
+```
+
+## Running the sample with Azure Redis
+
+Execute the OpenRewrite recipe `rewrite-redis.yml`.
+Deploy the Azure Redis service with the Azure CLI script `src/main/azure/deploy-redis.sh`.
+
+Execute the Spring Boot application with `mvn spring-boot:run`
+
+Send messages to both queues:
+
+```
+curl -X GET "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=foo" --data-urlencode "message=HelloWorld Foo"
+curl -X GET "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=bar" --data-urlencode "message=HelloWorld Bar"
+```

@@ -12,20 +12,20 @@ It is a Spring Boot application and can be run with normal boot run methods, e.g
 Send messages to both queues:
 
 ```
-curl -G "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=foo" --data-urlencode "message=HelloWorld Foo"
-curl -G "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=bar" --data-urlencode "message=HelloWorld Bar"
+curl -X GET "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=foo" --data-urlencode "message=HelloWorld Foo"
+curl -X GET "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=bar" --data-urlencode "message=HelloWorld Bar"
 ```
 
 ## Running the sample with Azure Service Bus
 
-Execute the OpenRewrite recipe `rewrite.yml`.
-Deploy the Azure Service Bus instance and the two queues with the Azure CLI script `src/main/azure/deploy.sh`.
+Execute the OpenRewrite recipe `rewrite-rabbitmq.yml`.
+Deploy the Azure Service Bus instance and the two queues with the Azure CLI script `src/main/azure/deploy-rabbitmq.sh`.
 
 Execute the Spring Boot application with `mvn spring-boot:run`
 
 Send messages to both queues:
 
 ```
-curl -G "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=foo" --data-urlencode "message=HelloWorld Foo"
-curl -G "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=bar" --data-urlencode "message=HelloWorld Bar"
+curl -X GET "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=foo" --data-urlencode "message=HelloWorld Foo"
+curl -X GET "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=bar" --data-urlencode "message=HelloWorld Bar"
 ```

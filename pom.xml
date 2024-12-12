@@ -13,5 +13,6 @@
         <module>postgres</module>
         <module>rabbitmq</module>
         <module>rabbitmq-json</module>
+        <module>redis</module>
     </modules>
 </project>

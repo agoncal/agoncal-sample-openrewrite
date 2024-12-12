@@ -9,18 +9,18 @@ It is a Quarkus application and can be run with : `mvn quarkus:dev`
 Get the content of the database:
 
 ```
-curl -G "http://127.0.0.1:8080/countries" | jq
+curl -X GET "http://127.0.0.1:8080/countries" | jq
 ```
 
 ## Running the sample with Azure Postgres
 
-Execute the OpenRewrite recipe `rewrite.yml`.
-Deploy the Azure Postgres database with the Azure CLI script `src/main/azure/deploy.sh`.
+Execute the OpenRewrite recipe `rewrite-postgres.yml`.
+Deploy the Azure Postgres database with the Azure CLI script `src/main/azure/deploy-postgres.sh`.
 
 Execute the application with `mvn quarkus:dev`
 
 Get the content of the database:
 
 ```
-curl -G "http://127.0.0.1:8080/countries" | jq
+curl -X GET "http://127.0.0.1:8080/countries" | jq
 ```

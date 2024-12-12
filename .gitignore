@@ -31,3 +31,6 @@ replay_pid*
 *.iws
 *.iml
 *.ipr
+
+redis-data/
+redis.conf/

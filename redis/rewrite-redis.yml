@@ -1,0 +1,76 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.azure.migrate.MigrateRabbitMQToAzureServiceBus
+displayName: Migrate RabbitMQ to Azure Service Bus
+description: Replaces RabbitMQ dependencies and APIs with Azure Service Bus dependencies
+tags:
+  - migration
+  - rabbitMQ
+  - messaging
+  - azure
+  - spring
+recipeList:
+
+  # Change RabbitMQ dependencies with Azure Service Bus dependencies
+  - org.openrewrite.maven.ChangeDependencyGroupIdAndArtifactId:
+      oldGroupId: org.springframework.boot
+      oldArtifactId: spring-boot-starter-amqp
+      newGroupId: com.azure.spring
+      newArtifactId: spring-cloud-azure-starter-servicebus
+  - org.openrewrite.maven.AddDependency:
+      groupId: com.azure.spring
+      artifactId: spring-messaging-azure-servicebus
+      version: latest.release
+  - org.openrewrite.xml.AddCommentToXmlTag:
+      xPath: /project/dependencies/dependency[artifactId='spring-messaging-azure-servicebus']
+      commentText: Use Azure Service Bus in Spring applications https://learn.microsoft.com/azure/developer/java/spring-framework/using-service-bus-in-spring-applications
+  
+  # Add Azure dependency management
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: com.azure.spring
+      artifactId: spring-cloud-azure-dependencies
+      version: latest.release
+      scope: import
+      type: pom
+
+  # Core class migrations
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.springframework.amqp.rabbit.core.RabbitTemplate
+      newFullyQualifiedTypeName: com.azure.spring.messaging.servicebus.core.ServiceBusTemplate
+  - org.openrewrite.java.ChangeMethodName:
+      methodPattern: com.azure.spring.messaging.servicebus.core.ServiceBusTemplate convertAndSend(..)
+      newMethodName: send
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.springframework.amqp.core.Message
+      newFullyQualifiedTypeName: org.springframework.messaging.support.GenericMessage
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.springframework.amqp.rabbit.connection.ConnectionFactory
+      newFullyQualifiedTypeName: com.azure.spring.messaging.servicebus.core.ServiceBusProducerFactory
+
+  # Annotation migrations
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.springframework.amqp.rabbit.annotation.RabbitListener
+      newFullyQualifiedTypeName: com.azure.spring.messaging.servicebus.implementation.core.annotation.ServiceBusListener
+  - org.openrewrite.java.ChangeAnnotationAttributeName:
+      annotationType: com.azure.spring.messaging.servicebus.implementation.core.annotation.ServiceBusListener
+      oldAttributeName: queues
+      newAttributeName: destination
+
+  # Configuration property changes
+  - org.openrewrite.properties.ChangePropertyKey:
+      oldPropertyKey: spring.rabbitmq.host
+      newPropertyKey: spring.cloud.azure.servicebus.connection-string
+  - org.openrewrite.properties.ChangePropertyValue:
+      propertyKey: spring.cloud.azure.servicebus.connection-string
+      newValue: Endpoint=sb://localhost;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true;
+      comment: Azure Service Bus connection string. The following value uses the Azure Service Bus Emulator
+  - org.openrewrite.properties.DeleteProperty:
+      propertyKey: spring.rabbitmq.port
+  - org.openrewrite.properties.DeleteProperty:
+      propertyKey: spring.rabbitmq.username
+  - org.openrewrite.properties.DeleteProperty:
+      propertyKey: spring.rabbitmq.password
+  - org.openrewrite.properties.AddProperty:
+      property: spring.cloud.azure.servicebus.entity-type
+      value: queue
+      comment: Azure Service Bus entity type. Could be `queue` or `topic`

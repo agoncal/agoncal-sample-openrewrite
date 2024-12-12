@@ -1,4 +1,4 @@
-name: rabbitmq
+name: rabbitmq-migration
 services:
   rabbitmq:
     container_name: rabbit

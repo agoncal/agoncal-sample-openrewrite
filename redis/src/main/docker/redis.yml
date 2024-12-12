@@ -1,0 +1,16 @@
+name: redis-migration
+services:
+  redis:
+    image: "redis:7.4.1"
+    ports:
+      - "6379:6379"
+    volumes:
+      - $PWD/redis-data:/var/lib/redis
+      - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - redis_network
+networks:
+  redis_network:
+    driver: bridge

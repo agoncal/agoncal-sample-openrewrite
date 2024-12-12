@@ -24,10 +24,10 @@ az group create \
 echo "Creating the Service Bus namespace..."
 echo "------------------------------"
 az servicebus namespace create \
-  --resource-group "$RESOURCE_GROUP" \
+  --name "$RESOURCE_GROUP" \
+  --location "$LOCATION" \
   --name "$SERVICE_BUS_NAMESPACE" \
-  --sku Premium \
-  --location "$LOCATION"  
+  --sku Premium
 
 echo "Creating the Service Bus queues..."
 echo "------------------------------"
