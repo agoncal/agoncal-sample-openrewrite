@@ -30,6 +30,11 @@ Execute the Spring Boot application with `mvn spring-boot:run`
 Send messages to both queues:
 
 ```
-curl -X GET "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=foo" --data-urlencode "message=HelloWorld Foo"
-curl -X GET "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=bar" --data-urlencode "message=HelloWorld Bar"
+curl -X GET  "http://127.0.0.1:8080/products"
+curl -X POST "http://127.0.0.1:8080/product/add" -H "Content-Type: application/json" -d '{"id":1,"name":"Product One"}'
+curl -X POST "http://127.0.0.1:8080/product/add" -H "Content-Type: application/json" -d '{"id":2,"name":"Product Two"}'
+curl -X POST "http://127.0.0.1:8080/product/add" -H "Content-Type: application/json" -d '{"id":3,"name":"Product Three"}'
+curl -X POST "http://127.0.0.1:8080/product/add" -H "Content-Type: application/json" -d '{"id":4,"name":"Product Four"}'
+curl -X GET  "http://127.0.0.1:8080/product/1"
+curl -X GET  "http://127.0.0.1:8080/products"
 ```
