@@ -14,5 +14,6 @@
         <module>rabbitmq</module>
         <module>rabbitmq-json</module>
         <module>redis</module>
+        <module>storage</module>
     </modules>
 </project>

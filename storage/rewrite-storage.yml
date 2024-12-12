@@ -1,0 +1,31 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.azure.migrate.MigrateRedisToAzureRedis
+displayName: Migrate Redis to Azure Redis
+description: Sets the SpringBoot Redis configuration to use Azure Redis
+tags:
+  - spring
+  - migration
+  - redis
+  - cache
+  - azure
+  - azure redis
+recipeList:
+
+  # Configuration property changes
+  - org.openrewrite.properties.ChangePropertyValue:
+      propertyKey: spring.data.redis.host
+      newValue: <azure-redis-name>.redis.cache.windows.net
+      comment: TODO Azure Redis connection string. Change the <azure-redis-name>
+  - org.openrewrite.properties.ChangePropertyValue:
+      propertyKey: spring.data.redis.port
+      newValue: 6380
+      comment: TODO Azure Redis listening port. Change the default port number
+  - org.openrewrite.properties.AddProperty:
+      property: spring.data.redis.ssl.enabled
+      value: true
+      comment: TODO Azure Redis connexion uses TLS/SSL encryption by default
+  - org.openrewrite.properties.AddProperty:
+      property: spring.data.redis.password
+      value: <DA9YN1r6m7zKKivo8NasdfatrgASEDASDFAST4AzCaO7zUjU=>
+      comment: TODO Azure Redis access key
