@@ -20,6 +20,14 @@ curl -X GET  "http://127.0.0.1:8080/product/1"
 curl -X GET  "http://127.0.0.1:8080/products"
 ```
 
+## Generating an OpenRewrite recipe with AI
+
+Write an OpenRewrite recipe using YAML to migrate this SpringBoot application to Azure Redis. The output has to be well formatted YAML and YAML only. Here are the application characteristics:
+
+* It uses a local Redis cache and I need to migrate it to Azure Redis.
+* The Redis server name is redis-openrewrite-3821.
+* The Redis password is DA9YN1r6m7zKKivo8NasdfatrgASEDASDFAST4AzCaO7zUjU.
+
 ## Running the sample with Azure Redis
 
 Execute the OpenRewrite recipe `rewrite-redis.yml`.

@@ -12,6 +12,16 @@ Get the content of the database:
 curl -X GET "http://127.0.0.1:8080/countries" | jq
 ```
 
+## Generating an OpenRewrite recipe with AI
+
+Write an OpenRewrite recipe using YAML to migrate this Quarkus application to Azure Postgres Flexible Server. The output has to be well formatted YAML and YAML only. Here are the application characteristics:
+
+* It uses a local Postgres database and I need to migrate it to Azure Postgres Flexible Server.
+* The Postgres Flexible server name is db-openrewrite.postgres.
+* The database username is dbopenrewriteadmin.
+* The database password is db-openrewrite-p#ssw0rd-12046.
+
+
 ## Running the sample with Azure Postgres
 
 Execute the OpenRewrite recipe `rewrite-postgres.yml`.
