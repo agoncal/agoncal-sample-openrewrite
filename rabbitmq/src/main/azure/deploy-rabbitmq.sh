@@ -12,6 +12,7 @@ RESOURCE_GROUP="rg-$PROJECT"
 # Pick your closest region az account list-locations --output table --query "sort_by([].{Name: name, DisplayName: displayName}, &Name)"
 LOCATION="swedencentral"
 TAG="$PROJECT"
+# Azure Service Bus
 SERVICE_BUS_NAMESPACE="sb-$UNIQ_KEY"
 
 echo "Creating the resource group..."
@@ -24,7 +25,7 @@ az group create \
 echo "Creating the Service Bus namespace..."
 echo "------------------------------"
 az servicebus namespace create \
-  --name "$RESOURCE_GROUP" \
+  --resource-group "$RESOURCE_GROUP" \
   --location "$LOCATION" \
   --name "$SERVICE_BUS_NAMESPACE" \
   --sku Premium

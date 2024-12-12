@@ -1,4 +1,4 @@
-name: azure-servicebus-emulator-migration
+name: openrewrite-migration
 services:
   emulator:
     container_name: "azure-servicebus-emulator"

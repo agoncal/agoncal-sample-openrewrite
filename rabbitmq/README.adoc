@@ -6,14 +6,16 @@ This sample has two parts: one that sends messages to RabbitMQ and another that 
 
 Start RabbitMQ : `docker compose -f src/main/docker/rabbitmq.yml up`.
 Go to RabbitMQ console at http://localhost:15672 with username `guest` and password `guest` and create the two queues `foo` and `bar`.
+
 RabbitMQ is listening on port `5677` (check the `application.properties` file).
 It is a Spring Boot application and can be run with normal boot run methods, e.g.: `mvn spring-boot:run`
 
 Send messages to both queues:
 
 ```
-curl -X GET "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=foo" --data-urlencode "message=HelloWorld Foo"
-curl -X GET "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=bar" --data-urlencode "message=HelloWorld Bar"
+curl -G "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=foo" --data-urlencode "message=HelloWorld Foo"
+curl -G "http://127.0.0.1:8080/sendMessages" --data-urlencode "queue=bar" --data-urlencode "message=HelloWorld Bar"
+
 ```
 
 ## Running the sample with Azure Service Bus

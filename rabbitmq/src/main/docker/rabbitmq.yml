@@ -1,4 +1,4 @@
-name: rabbitmq-migration
+name: openrewrite-migration
 services:
   rabbitmq:
     container_name: rabbit
