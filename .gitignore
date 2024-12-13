@@ -34,3 +34,4 @@ replay_pid*
 
 redis-data/
 redis.conf/
+tmp/download-bio-*.txt

@@ -42,8 +42,10 @@ az storage account create \
 
 echo "Retrieving the DB connection string..."
 echo "------------------------------"
-STORAGE_ACCOUNT_CONNECTION_STRING=$(az storage account show-connection-string --resource-group $RESOURCE_GROUP --name $STORAGE_ACCOUNT_NAME --output tsv)
+STORAGE_ACCOUNT_ENDPOINT=$(az storage account show --resource-group $RESOURCE_GROUP --name $STORAGE_ACCOUNT_NAME --query "primaryEndpoints.file" --output tsv)
+echo STORAGE_ACCOUNT_ENDPOINT="$STORAGE_ACCOUNT_ENDPOINT"
 
+STORAGE_ACCOUNT_CONNECTION_STRING=$(az storage account show-connection-string --resource-group $RESOURCE_GROUP --name $STORAGE_ACCOUNT_NAME --output tsv)
 echo STORAGE_ACCOUNT_CONNECTION_STRING="$STORAGE_ACCOUNT_CONNECTION_STRING"
 
 echo "Creating a Share Storage..."
